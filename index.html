@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SokoniMBS - Mobile Data & Services</title>
+    <title>Bingwa - Mobile Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,360 +14,188 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 25%, #45b7d1 50%, #96ceb4 75%, #feca57 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            padding: 20px;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 15px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 40px;
             color: white;
-            position: relative;
-            padding: 20px 0;
         }
 
-        .header::before {
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            z-index: -1;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
         }
 
-        .brand-name {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
 
-        .header h1 {
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .service-icon {
             font-size: 2.5rem;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            background: linear-gradient(45deg, #fff, #f0f8ff);
+            margin-right: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.95;
+        .service-title {
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: 600;
         }
 
         .offers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .offer-category {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .offer-category:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .category-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 1.3rem;
-            color: white;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-        }
-
-        .category-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
+            gap: 15px;
         }
 
         .offer-item {
-            padding: 15px;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
-            border-radius: 10px;
-            border: 1px solid #e0e6ff;
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
             transition: all 0.3s ease;
         }
 
         .offer-item:hover {
-            background: linear-gradient(135deg, #e8ecff, #d4e0ff);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            background: #f0f2ff;
+            transform: translateX(5px);
         }
 
         .offer-header {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-
-        .offer-details {
-            flex: 1;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .offer-name {
             font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 4px;
             color: #333;
-        }
-
-        .offer-validity {
-            font-size: 0.85rem;
-            color: #666;
-            margin-bottom: 4px;
-        }
-
-        .offer-description {
-            font-size: 0.8rem;
-            color: #888;
+            font-size: 1.1rem;
         }
 
         .offer-price {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: #667eea;
-            margin-left: 12px;
         }
 
-        .offer-buttons {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .buy-btn {
-            flex: 1;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .buy-now-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .buy-now-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        .buy-another-btn {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-        }
-
-        .buy-another-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
-        }
-
-        .buy-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .faq-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
-        }
-
-        .faq-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .faq-item {
-            margin-bottom: 12px;
-            padding: 12px;
-            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .faq-answer {
+        .offer-details {
             color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .offer-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
             font-size: 0.9rem;
         }
 
-        .history-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            backdrop-filter: blur(10px);
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-
-        .history-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .refresh-btn {
+        .btn-primary {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
+            flex: 1;
         }
 
-        .refresh-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .transaction-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            margin-bottom: 8px;
-            background: linear-gradient(135deg, #f8f9ff, #e8ecff);
+        .btn-secondary {
+            background: #f8f9ff;
+            color: #667eea;
+            border: 2px solid #667eea;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .phone-input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
             border-radius: 8px;
-            border-left: 4px solid #667eea;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
         }
 
-        .transaction-details h4 {
-            margin-bottom: 4px;
-            color: #333;
-            font-size: 0.95rem;
-        }
-
-        .transaction-details p {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 2px;
-        }
-
-        .transaction-status {
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .status-pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-failed {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 15px;
-            color: #666;
-        }
-
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 12px;
-            border-radius: 6px;
-            margin: 8px 0;
-            border: 1px solid #f5c6cb;
-        }
-
-        .success {
-            background: #d4edda;
-            color: #155724;
-            padding: 12px;
-            border-radius: 6px;
-            margin: 8px 0;
-            border: 1px solid #c3e6cb;
+        .phone-input:focus {
+            outline: none;
+            border-color: #667eea;
         }
 
         .modal {
@@ -378,112 +207,206 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background-color: white;
-            margin: 10% auto;
-            padding: 25px;
-            border-radius: 12px;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
             width: 90%;
-            max-width: 450px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            max-width: 500px;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
         }
 
-        .modal-header {
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #333;
             text-align: center;
+        }
+
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .modal-header h3 {
-            color: #333;
+        .form-group label {
+            display: block;
             margin-bottom: 8px;
-            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
         }
 
-        .modal-header p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .modal-input {
+        .form-group input, .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
             border-radius: 8px;
-            font-size: 0.95rem;
-            margin-bottom: 15px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
         }
 
-        .modal-input:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: #667eea;
         }
 
-        .modal-buttons {
-            display: flex;
-            gap: 12px;
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
         }
 
-        .modal-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message, .error-message {
+            padding: 15px;
             border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin: 15px 0;
+            display: none;
         }
 
-        .modal-confirm {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
 
-        .modal-cancel {
-            background: #f8f9fa;
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .transaction-history {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .transaction-history h2 {
             color: #333;
-            border: 2px solid #ddd;
+            margin-bottom: 25px;
+            text-align: center;
         }
 
-        .discount-badge {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 0.7rem;
+        .transaction-item {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .transaction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .transaction-name {
             font-weight: 600;
-            margin-left: 5px;
+            color: #333;
+        }
+
+        .transaction-amount {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .transaction-details {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-failed {
+            background-color: #f8d7da;
+            color: #721c24;
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
             .header h1 {
                 font-size: 2rem;
             }
-
-            .offers-grid {
+            
+            .services-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 20px;
             }
-
-            .offer-buttons {
+            
+            .service-card {
+                padding: 20px;
+            }
+            
+            .offer-actions {
                 flex-direction: column;
             }
-
+            
             .modal-content {
-                margin: 5% auto;
-                width: 95%;
-            }
-
-            .brand-name {
-                font-size: 1.2rem;
-                top: 5px;
-                left: 10px;
+                margin: 10% auto;
+                padding: 20px;
             }
         }
     </style>
@@ -491,668 +414,347 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="brand-name">SokoniMBS</div>
-            <h1>🏪 Soko ya MBS</h1>
-            <p>Fast, reliable, and affordable mobile data & services</p>
+            <h1>🎯 Bingwa</h1>
+            <p>Your trusted mobile services provider</p>
         </div>
 
-        <div class="offers-grid">
-            <!-- Hot Offers -->
-            <div class="offer-category">
-                <div class="category-header">
-                    <div class="category-icon">🔥</div>
-                    <div class="category-title">Hot Offers</div>
+        <div class="services-grid">
+            <!-- Data Bundles -->
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="fas fa-wifi service-icon"></i>
+                    <h2 class="service-title">Data Bundles</h2>
                 </div>
-                
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1.25GB Till Midnight</div>
-                            <div class="offer-validity">Valid until midnight</div>
-                            <div class="offer-description">Perfect for evening browsing</div>
+                <div class="offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">1GB Daily</span>
+                            <span class="offer-price">KSh 20</span>
                         </div>
-                        <div class="offer-price">KSh 55</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '1.25GB Till Midnight', 55, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '1.25GB Till Midnight', 55, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1.2GB Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Long-term data bundle</div>
+                        <div class="offer-details">Valid for 24 hours • High-speed internet</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('data', '1GB Daily', 20)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 250</div>
                     </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '1.2GB Monthly', 250, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '1.2GB Monthly', 250, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">350MB Weekly</div>
-                            <div class="offer-validity">Valid for 7 days</div>
-                            <div class="offer-description">Weekly data bundle</div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">5GB Weekly</span>
+                            <span class="offer-price">KSh 100</span>
                         </div>
-                        <div class="offer-price">KSh 49</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '350MB Weekly', 49, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '350MB Weekly', 49, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1GB Hourly</div>
-                            <div class="offer-validity">Valid for 1 hour</div>
-                            <div class="offer-description">Quick data boost</div>
+                        <div class="offer-details">Valid for 7 days • Perfect for streaming</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('data', '5GB Weekly', 100)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 19</div>
                     </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '1GB Hourly', 19, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '1GB Hourly', 19, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">250MB Daily</div>
-                            <div class="offer-validity">Valid for 24 hours</div>
-                            <div class="offer-description">Daily data bundle</div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">20GB Monthly</span>
+                            <span class="offer-price">KSh 300</span>
                         </div>
-                        <div class="offer-price">KSh 20</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '250MB Daily', 20, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '250MB Daily', 20, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1GB Daily Premium</div>
-                            <div class="offer-validity">Valid for 24 hours</div>
-                            <div class="offer-description">Premium daily bundle</div>
+                        <div class="offer-details">Valid for 30 days • Best value for heavy users</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('data', '20GB Monthly', 300)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 99</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '1GB Daily Premium', 99, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '1GB Daily Premium', 99, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">2.5GB Weekly</div>
-                            <div class="offer-validity">Valid for 7 days</div>
-                            <div class="offer-description">Weekly power bundle</div>
-                        </div>
-                        <div class="offer-price">KSh 300</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '2.5GB Weekly', 300, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '2.5GB Weekly', 300, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">6GB Weekly</div>
-                            <div class="offer-validity">Valid for 7 days</div>
-                            <div class="offer-description">Ultimate weekly bundle</div>
-                        </div>
-                        <div class="offer-price">KSh 700</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('data', '6GB Weekly', 700, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('data', '6GB Weekly', 700, true)">Buy for Another</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Renewable Offers -->
-            <div class="offer-category">
-                <div class="category-header">
-                    <div class="category-icon">🔄</div>
-                    <div class="category-title">Renewable Offers</div>
+            <!-- Renewable Data -->
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="fas fa-sync-alt service-icon"></i>
+                    <h2 class="service-title">Renewable Data</h2>
                 </div>
-                
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">2GB Daily Renewable <span class="discount-badge">Save 20%</span></div>
-                            <div class="offer-validity">Valid for 24 hours</div>
-                            <div class="offer-description">Auto-renews daily with savings</div>
+                <div class="offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">2GB Renewable</span>
+                            <span class="offer-price">KSh 50</span>
                         </div>
-                        <div class="offer-price">KSh 110</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('renewable', '2GB Daily Renewable', 110, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('renewable', '2GB Daily Renewable', 110, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1GB Hourly Renewable</div>
-                            <div class="offer-validity">Valid for 1 hour</div>
-                            <div class="offer-description">Auto-renews hourly</div>
+                        <div class="offer-details">Auto-renews when depleted • Convenient</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('renewable', '2GB Renewable', 50)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 23</div>
                     </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('renewable', '1GB Hourly Renewable', 23, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('renewable', '1GB Hourly Renewable', 23, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1.5GB 3-Hour Renewable</div>
-                            <div class="offer-validity">Valid for 3 hours</div>
-                            <div class="offer-description">Auto-renews every 3 hours</div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">10GB Renewable</span>
+                            <span class="offer-price">KSh 200</span>
                         </div>
-                        <div class="offer-price">KSh 52</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('renewable', '1.5GB 3-Hour Renewable', 52, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('renewable', '1.5GB 3-Hour Renewable', 52, true)">Buy for Another</button>
+                        <div class="offer-details">Auto-renews when depleted • Great for families</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('renewable', '10GB Renewable', 200)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Monthly Offers -->
-            <div class="offer-category">
-                <div class="category-header">
-                    <div class="category-icon">📅</div>
-                    <div class="category-title">Monthly Packages</div>
+            <!-- Monthly Packages -->
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="fas fa-calendar-alt service-icon"></i>
+                    <h2 class="service-title">Monthly Packages</h2>
                 </div>
-                
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1.2GB Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Monthly data package</div>
+                <div class="offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">50GB Monthly</span>
+                            <span class="offer-price">KSh 500</span>
                         </div>
-                        <div class="offer-price">KSh 250</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('monthly', '1.2GB Monthly', 250, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('monthly', '1.2GB Monthly', 250, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">300 Minutes Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Monthly calling bundle</div>
+                        <div class="offer-details">Valid for 30 days • Unlimited social media</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('monthly', '50GB Monthly', 500)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 500</div>
                     </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('monthly', '300 Minutes Monthly', 500, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('monthly', '300 Minutes Monthly', 500, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">800 Minutes Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Premium calling bundle</div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">100GB Monthly</span>
+                            <span class="offer-price">KSh 800</span>
                         </div>
-                        <div class="offer-price">KSh 1001</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('monthly', '800 Minutes Monthly', 1001, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('monthly', '800 Minutes Monthly', 1001, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">8GB + 400 Minutes Combo</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Ultimate monthly combo</div>
+                        <div class="offer-details">Valid for 30 days • Premium package</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('monthly', '100GB Monthly', 800)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 999</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('monthly', '8GB + 400 Minutes Combo', 999, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('monthly', '8GB + 400 Minutes Combo', 999, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">2.5GB Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Monthly data bundle</div>
-                        </div>
-                        <div class="offer-price">KSh 500</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('monthly', '2.5GB Monthly', 500, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('monthly', '2.5GB Monthly', 500, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">10GB Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Large monthly data bundle</div>
-                        </div>
-                        <div class="offer-price">KSh 1000</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('monthly', '10GB Monthly', 1000, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('monthly', '10GB Monthly', 1000, true)">Buy for Another</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Minutes Offers -->
-            <div class="offer-category">
-                <div class="category-header">
-                    <div class="category-icon">📞</div>
-                    <div class="category-title">Minutes Offers</div>
+            <!-- Minutes -->
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="fas fa-phone service-icon"></i>
+                    <h2 class="service-title">Voice Minutes</h2>
                 </div>
-                
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">45 Minutes</div>
-                            <div class="offer-validity">Valid for 3 hours</div>
-                            <div class="offer-description">Quick calling bundle</div>
+                <div class="offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">100 Minutes</span>
+                            <span class="offer-price">KSh 50</span>
                         </div>
-                        <div class="offer-price">KSh 22</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('minutes', '45 Minutes', 22, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('minutes', '45 Minutes', 22, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">50 Minutes Till Midnight</div>
-                            <div class="offer-validity">Valid till midnight</div>
-                            <div class="offer-description">Evening calling bundle</div>
+                        <div class="offer-details">Valid for 7 days • All networks</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '100 Minutes', 50)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 51</div>
                     </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('minutes', '50 Minutes Till Midnight', 51, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('minutes', '50 Minutes Till Midnight', 51, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">200 Minutes Weekly</div>
-                            <div class="offer-validity">Valid for 7 days</div>
-                            <div class="offer-description">Weekly calling bundle</div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">500 Minutes</span>
+                            <span class="offer-price">KSh 200</span>
                         </div>
-                        <div class="offer-price">KSh 250</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('minutes', '200 Minutes Weekly', 250, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('minutes', '200 Minutes Weekly', 250, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">300 Minutes Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Monthly calling bundle</div>
+                        <div class="offer-details">Valid for 30 days • All networks</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '500 Minutes', 200)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 500</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('minutes', '300 Minutes Monthly', 500, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('minutes', '300 Minutes Monthly', 500, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">800 Minutes Monthly</div>
-                            <div class="offer-validity">Valid for 30 days</div>
-                            <div class="offer-description">Premium monthly calling</div>
-                        </div>
-                        <div class="offer-price">KSh 1001</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('minutes', '800 Minutes Monthly', 1001, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('minutes', '800 Minutes Monthly', 1001, true)">Buy for Another</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Bingwa Points -->
-            <div class="offer-category">
-                <div class="category-header">
-                    <div class="category-icon">🎁</div>
-                    <div class="category-title">Bingwa Points</div>
+            <!-- SMS -->
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="fas fa-sms service-icon"></i>
+                    <h2 class="service-title">SMS Packages</h2>
                 </div>
-                
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">1000 Bingwa Points</div>
-                            <div class="offer-validity">No expiry</div>
-                            <div class="offer-description">Official rate - Sell your points</div>
+                <div class="offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">1000 SMS</span>
+                            <span class="offer-price">KSh 30</span>
                         </div>
-                        <div class="offer-price">KSh 200</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('bonga', '1000 Bingwa Points', 200, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('bonga', '1000 Bingwa Points', 200, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">2500 Bingwa Points</div>
-                            <div class="offer-validity">No expiry</div>
-                            <div class="offer-description">Bulk rate - Better value</div>
+                        <div class="offer-details">Valid for 30 days • All networks</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('sms', '1000 SMS', 30)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
-                        <div class="offer-price">KSh 500</div>
                     </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('bonga', '2500 Bingwa Points', 500, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('bonga', '2500 Bingwa Points', 500, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">5000 Bingwa Points</div>
-                            <div class="offer-validity">No expiry</div>
-                            <div class="offer-description">Maximum value package</div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">5000 SMS</span>
+                            <span class="offer-price">KSh 100</span>
                         </div>
-                        <div class="offer-price">KSh 1000</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('bonga', '5000 Bingwa Points', 1000, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('bonga', '5000 Bingwa Points', 1000, true)">Buy for Another</button>
+                        <div class="offer-details">Valid for 30 days • All networks</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('sms', '5000 SMS', 100)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Airtime -->
-            <div class="offer-category">
-                <div class="category-header">
-                    <div class="category-icon">💰</div>
-                    <div class="category-title">Airtime <span class="discount-badge">Up to 5% Off</span></div>
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="fas fa-mobile-alt service-icon"></i>
+                    <h2 class="service-title">Airtime</h2>
+                </div>
+                <div class="offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">KSh 50 Airtime</span>
+                            <span class="offer-price">KSh 50</span>
+                        </div>
+                        <div class="offer-details">Instant top-up • No expiry</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('airtime', 'KSh 50 Airtime', 50)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
+                        </div>
+                    </div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">KSh 100 Airtime</span>
+                            <span class="offer-price">KSh 100</span>
+                        </div>
+                        <div class="offer-details">Instant top-up • No expiry</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('airtime', 'KSh 100 Airtime', 100)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
+                        </div>
+                    </div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">KSh 500 Airtime</span>
+                            <span class="offer-price">KSh 500</span>
+                        </div>
+                        <div class="offer-details">Instant top-up • No expiry</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('airtime', 'KSh 500 Airtime', 500)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bonga Points -->
+            <div class="service-card">
+                <div class="service-header">
+                    <i class="fas fa-star service-icon"></i>
+                    <h2 class="service-title">Bonga Points</h2>
+                </div>
+                <div class="offers-grid">
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">1000 Bonga Points</span>
+                            <span class="offer-price">KSh 100</span>
+                        </div>
+                        <div class="offer-details">Redeem for airtime or data • No expiry</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('bonga', '1000 Bonga Points', 100)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
+                        </div>
+                    </div>
+                    <div class="offer-item">
+                        <div class="offer-header">
+                            <span class="offer-name">5000 Bonga Points</span>
+                            <span class="offer-price">KSh 400</span>
+                        </div>
+                        <div class="offer-details">Redeem for airtime or data • No expiry</div>
+                        <div class="offer-actions">
+                            <button class="btn btn-primary" onclick="openPurchaseModal('bonga', '5000 Bonga Points', 400)">Buy Now</button>
+                            <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="transaction-history">
+            <h2>📊 Transaction History</h2>
+            <div class="phone-input-container">
+                <input type="tel" id="historyPhone" class="phone-input" placeholder="Enter phone number to view history (e.g., 0712345678)">
+                <button class="btn btn-primary" onclick="loadTransactionHistory()" style="margin-top: 10px; width: 100%;">Load History</button>
+            </div>
+            <div id="transactionsList"></div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePurchaseModal()">&times;</span>
+            <h2 id="modalTitle">Complete Purchase</h2>
+            
+            <div id="purchaseForm">
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" id="phoneNumber" placeholder="e.g., 0712345678" required>
                 </div>
                 
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">KSh 100 Airtime <span class="discount-badge">3% Off</span></div>
-                            <div class="offer-validity">No expiry</div>
-                            <div class="offer-description">Direct airtime top-up with discount</div>
-                        </div>
-                        <div class="offer-price">KSh 97</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('airtime', 'KSh 100 Airtime', 97, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('airtime', 'KSh 100 Airtime', 97, true)">Buy for Another</button>
-                    </div>
+                <div class="form-group">
+                    <label for="recipientPhone">Recipient Phone Number:</label>
+                    <input type="tel" id="recipientPhone" placeholder="e.g., 0712345678 (same as above if for yourself)" required>
                 </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">KSh 200 Airtime <span class="discount-badge">3% Off</span></div>
-                            <div class="offer-validity">No expiry</div>
-                            <div class="offer-description">Direct airtime top-up with discount</div>
-                        </div>
-                        <div class="offer-price">KSh 194</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('airtime', 'KSh 200 Airtime', 194, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('airtime', 'KSh 200 Airtime', 194, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">KSh 500 Airtime <span class="discount-badge">3% Off</span></div>
-                            <div class="offer-validity">No expiry</div>
-                            <div class="offer-description">Direct airtime top-up with discount</div>
-                        </div>
-                        <div class="offer-price">KSh 485</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('airtime', 'KSh 500 Airtime', 485, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('airtime', 'KSh 500 Airtime', 485, true)">Buy for Another</button>
-                    </div>
-                </div>
-
-                <div class="offer-item">
-                    <div class="offer-header">
-                        <div class="offer-details">
-                            <div class="offer-name">KSh 1000 Airtime <span class="discount-badge">5% Off</span></div>
-                            <div class="offer-validity">No expiry</div>
-                            <div class="offer-description">Premium airtime with better discount</div>
-                        </div>
-                        <div class="offer-price">KSh 950</div>
-                    </div>
-                    <div class="offer-buttons">
-                        <button class="buy-btn buy-now-btn" onclick="buyOffer('airtime', 'KSh 1000 Airtime', 950, false)">Buy Now</button>
-                        <button class="buy-btn buy-another-btn" onclick="buyOffer('airtime', 'KSh 1000 Airtime', 950, true)">Buy for Another</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="statusMessage"></div>
-
-        <!-- FAQ Section -->
-        <div class="faq-section">
-            <div class="faq-title">❓ Frequently Asked Questions</div>
-            
-            <div class="faq-item">
-                <div class="faq-question">How to buy manually?</div>
-                <div class="faq-answer">Pay exact amount to Till: 4288958</div>
+                
+                <button class="btn btn-primary" onclick="processPurchase()" style="width: 100%;">
+                    Complete Purchase
+                </button>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">How to become an affiliate?</div>
-                <div class="faq-answer">Contact customer support for affiliate program details</div>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Processing your payment...</p>
             </div>
             
-            <div class="faq-item">
-                <div class="faq-question">How long does it take to receive my bundle?</div>
-                <div class="faq-answer">Bundles are delivered instantly after successful payment confirmation</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Can I buy bundles for other networks?</div>
-                <div class="faq-answer">Yes, our platform supports all major networks in Kenya</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">What payment methods do you accept?</div>
-                <div class="faq-answer">We accept M-Pesa, Airtel Money, and direct till payments</div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">Is my payment information secure?</div>
-                <div class="faq-answer">Yes, all transactions are encrypted and processed through secure payment gateways</div>
-            </div>
-        </div>
-
-        <div class="history-section">
-            <div class="history-header">
-                <div class="history-title">📋 Transaction History</div>
-                <button class="refresh-btn" onclick="loadTransactionHistory()">🔄 Refresh</button>
-            </div>
-            <div id="transactionHistory">
-                <div class="loading">Click on any "Buy Now" button to start viewing your transaction history</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for Phone Input -->
-    <div id="phoneModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Enter Your Phone Number</h3>
-                <p>We need your phone number to process the payment</p>
-            </div>
-            <input type="tel" id="payerPhoneInput" class="modal-input" placeholder="Your phone number (e.g., 0712345678)">
-            <div class="modal-buttons">
-                <button class="modal-btn modal-cancel" onclick="closePhoneModal()">Cancel</button>
-                <button class="modal-btn modal-confirm" onclick="confirmPhoneNumber()">Continue</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for "Buy for Another" -->
-    <div id="recipientModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Buy for Another Person</h3>
-                <p>Enter the recipient's phone number</p>
-            </div>
-            <input type="tel" id="recipientPhoneInput" class="modal-input" placeholder="Recipient's phone number (e.g., 0712345678)">
-            <div class="modal-buttons">
-                <button class="modal-btn modal-cancel" onclick="closeRecipientModal()">Cancel</button>
-                <button class="modal-btn modal-confirm" onclick="confirmPurchase()">Confirm Purchase</button>
-            </div>
+            <div id="successMessage" class="success-message"></div>
+            <div id="errorMessage" class="error-message"></div>
         </div>
     </div>
 
     <script>
-        let currentOffer = null;
-        let userPhone = null;
+        let currentOffer = {};
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            // No automatic loading of transaction history
-        });
+        function openPurchaseModal(type, name, price) {
+            currentOffer = { type, name, price };
+            document.getElementById('modalTitle').textContent = `Purchase ${name}`;
+            document.getElementById('purchaseModal').style.display = 'block';
+            
+            // Reset form
+            document.getElementById('purchaseForm').style.display = 'block';
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            // Clear inputs
+            document.getElementById('phoneNumber').value = '';
+            document.getElementById('recipientPhone').value = '';
+        }
 
-        function buyOffer(type, offerName, price, forAnother) {
-            currentOffer = { type, offerName, price, forAnother };
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
 
-            if (!userPhone) {
-                // Show phone input modal
-                document.getElementById('phoneModal').style.display = 'block';
-                document.getElementById('payerPhoneInput').value = '';
-                document.getElementById('payerPhoneInput').focus();
-            } else {
-                proceedWithOffer(forAnother);
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target === modal) {
+                closePurchaseModal();
             }
         }
 
-        function closePhoneModal() {
-            document.getElementById('phoneModal').style.display = 'none';
-        }
-
-        function confirmPhoneNumber() {
-            const phone = document.getElementById('payerPhoneInput').value;
+        async function processPurchase() {
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            const recipientPhone = document.getElementById('recipientPhone').value.trim();
             
-            if (!phone || phone.length < 10) {
-                showMessage('❌ Please enter a valid phone number', 'error');
+            if (!phoneNumber || !recipientPhone) {
+                showError('Please fill in all required fields');
                 return;
             }
 
-            // Check if currentOffer exists
-            if (!currentOffer) {
-                showMessage('❌ No offer selected. Please try again.', 'error');
-                closePhoneModal();
-                return;
-            }
-            userPhone = phone;
-            closePhoneModal();
-            
-            // Load transaction history for the first time
-            loadTransactionHistory();
-            
-            proceedWithOffer(currentOffer.forAnother);
-        }
+            // Show loading
+            document.getElementById('purchaseForm').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
 
-        function proceedWithOffer(forAnother) {
-            // Additional safety check
-            if (!currentOffer) {
-                showMessage('❌ No offer selected. Please try again.', 'error');
-                return;
-            }
-            
-            if (forAnother) {
-                // Show modal for recipient phone number
-                document.getElementById('recipientModal').style.display = 'block';
-                document.getElementById('recipientPhoneInput').value = '';
-                document.getElementById('recipientPhoneInput').focus();
-            } else {
-                // Buy for self
-                processPurchase(userPhone, userPhone);
-            }
-        }
-
-        function closeRecipientModal() {
-            document.getElementById('recipientModal').style.display = 'none';
-        }
-
-        function confirmPurchase() {
-            const recipientPhone = document.getElementById('recipientPhoneInput').value;
-            
-            if (!recipientPhone || recipientPhone.length < 10) {
-                showMessage('❌ Please enter a valid recipient phone number', 'error');
-                return;
-            }
-
-            closeRecipientModal();
-            processPurchase(userPhone, recipientPhone);
-        }
-
-        async function processPurchase(payerPhone, recipientPhone) {
-            const statusMessage = document.getElementById('statusMessage');
-            
-            if (!currentOffer) {
-                showMessage('❌ No offer selected', 'error');
-                return;
-            }
-            
-            // Show loading message
-            statusMessage.innerHTML = '<div class="loading">Processing your request...</div>';
-            
             try {
                 const response = await fetch('/stk-push', {
                     method: 'POST',
@@ -1160,160 +762,94 @@
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        phone: payerPhone,
+                        phone: phoneNumber,
                         amount: currentOffer.price,
                         type: currentOffer.type,
-                        offerName: currentOffer.offerName,
+                        offerName: currentOffer.name,
                         recipientPhone: recipientPhone
                     })
                 });
-                
+
                 const data = await response.json();
                 
-                if (data.ResponseCode === '0') {
-                    const recipient = payerPhone === recipientPhone ? 'yourself' : recipientPhone;
-                    showMessage(`✅ Payment request sent successfully! Buying ${currentOffer.offerName} for ${recipient}. Please complete the payment on your phone.`, 'success');
-                    
-                    // Start checking transaction status
-                    if (data.CheckoutRequestID) {
-                        checkTransactionStatus(data.CheckoutRequestID, data.AccountReference);
-                    }
-                    
-                    // Refresh transaction history after successful request
-                    setTimeout(() => {
-                        loadTransactionHistory();
-                    }, 2000);
+                // Hide loading
+                document.getElementById('loading').style.display = 'none';
+
+                if (data.success) {
+                    showSuccess(`${data.message}\n\nReference: ${data.reference}\nAccount Reference: ${data.AccountReference}`);
                 } else {
-                    showMessage(`❌ ${data.ResponseDescription || 'Payment request failed'}`, 'error');
+                    showError(data.message || 'Payment failed. Please try again.');
                 }
-                
+
             } catch (error) {
-                console.error('Purchase error:', error);
-                showMessage('❌ Network error. Please try again.', 'error');
-            } finally {
-                currentOffer = null;
+                console.error('Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                showError('Network error. Please check your connection and try again.');
             }
         }
 
-        // Function to check transaction status
-        function checkTransactionStatus(requestId, accountRef) {
-            let attempts = 0;
-            const maxAttempts = 12; // Check for 2 minutes (12 * 10 seconds)
-            
-            const statusInterval = setInterval(() => {
-                attempts++;
-                
-                fetch(`/api/transaction-status/${requestId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log('Status check:', data);
-                        
-                        if (data.success && data.transaction) {
-                            const status = data.transaction.status;
-                            
-                            if (status === 'SUCCESS') {
-                                clearInterval(statusInterval);
-                                alert('🎉 Payment completed successfully! Your bundle will be activated shortly.');
-                            } else if (status === 'FAILED' || status === 'CANCELLED') {
-                                clearInterval(statusInterval);
-                                alert('❌ Payment was not completed. Please try again.');
-                            }
-                        }
-                        
-                        // Stop checking after max attempts
-                        if (attempts >= maxAttempts) {
-                            clearInterval(statusInterval);
-                            console.log('Status check timeout - stopped checking');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Status check error:', error);
-                        if (attempts >= maxAttempts) {
-                            clearInterval(statusInterval);
-                        }
-                    });
-            }, 10000); // Check every 10 seconds
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
         }
 
         async function loadTransactionHistory() {
-            const historyContainer = document.getElementById('transactionHistory');
+            const phone = document.getElementById('historyPhone').value.trim();
             
-            if (!userPhone) {
-                historyContainer.innerHTML = '<div class="loading">Click on any "Buy Now" button to start viewing your transaction history</div>';
+            if (!phone) {
+                alert('Please enter a phone number');
                 return;
             }
-            
-            historyContainer.innerHTML = '<div class="loading">Loading transaction history...</div>';
-            
+
             try {
-                const response = await fetch(`/api/transactions/${encodeURIComponent(userPhone)}`);
+                const response = await fetch(`/api/transactions/${phone}`);
                 const data = await response.json();
                 
-                if (data.success && data.transactions) {
-                    displayTransactionHistory(data.transactions);
-                } else {
-                    historyContainer.innerHTML = '<div class="error">Failed to load transaction history</div>';
-                }
-            } catch (error) {
-                console.error('History loading error:', error);
-                historyContainer.innerHTML = '<div class="error">Network error loading transaction history</div>';
-            }
-        }
-
-        function displayTransactionHistory(transactions) {
-            const historyContainer = document.getElementById('transactionHistory');
-            
-            if (transactions.length === 0) {
-                historyContainer.innerHTML = '<div class="loading">No transactions found</div>';
-                return;
-            }
-            
-            const transactionHTML = transactions.map(transaction => {
-                const date = new Date(transaction.createdAt).toLocaleString();
-                const statusClass = `status-${transaction.status.toLowerCase()}`;
+                const transactionsList = document.getElementById('transactionsList');
                 
-                return `
-                    <div class="transaction-item">
-                        <div class="transaction-details">
-                            <h4>${transaction.offerName}</h4>
-                            <p><strong>Amount:</strong> KSh ${transaction.amount}</p>
-                            <p><strong>Type:</strong> ${transaction.type}</p>
-                            <p><strong>Date:</strong> ${date}</p>
-                            ${transaction.recipientPhone !== transaction.payerPhone ? 
-                                `<p><strong>Recipient:</strong> ${transaction.recipientPhone}</p>` : ''}
+                if (data.success && data.transactions.length > 0) {
+                    transactionsList.innerHTML = data.transactions.map(transaction => `
+                        <div class="transaction-item">
+                            <div class="transaction-header">
+                                <span class="transaction-name">${transaction.offerName}</span>
+                                <span class="transaction-amount">KSh ${transaction.amount}</span>
+                            </div>
+                            <div class="transaction-details">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                    <span>Type: ${transaction.type.toUpperCase()}</span>
+                                    <span class="status-badge status-${transaction.status.toLowerCase()}">${transaction.status}</span>
+                                </div>
+                                <div>Payer: ${transaction.payerPhone}</div>
+                                <div>Recipient: ${transaction.recipientPhone}</div>
+                                <div>Date: ${new Date(transaction.createdAt).toLocaleString()}</div>
+                                ${transaction.responseDescription ? `<div>Status: ${transaction.responseDescription}</div>` : ''}
+                            </div>
                         </div>
-                        <div class="transaction-status ${statusClass}">
-                            ${transaction.status}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            historyContainer.innerHTML = transactionHTML;
-        }
-
-        function showMessage(message, type) {
-            const statusMessage = document.getElementById('statusMessage');
-            statusMessage.innerHTML = `<div class="${type}">${message}</div>`;
-            
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                statusMessage.innerHTML = '';
-            }, 5000);
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const phoneModal = document.getElementById('phoneModal');
-            const recipientModal = document.getElementById('recipientModal');
-            
-            if (event.target === phoneModal) {
-                closePhoneModal();
-            }
-            if (event.target === recipientModal) {
-                closeRecipientModal();
+                    `).join('');
+                } else {
+                    transactionsList.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">No transactions found for this phone number.</p>';
+                }
+                
+            } catch (error) {
+                console.error('Error loading transaction history:', error);
+                document.getElementById('transactionsList').innerHTML = '<p style="text-align: center; color: #721c24; padding: 20px;">Error loading transaction history. Please try again.</p>';
             }
         }
+
+        // Auto-fill recipient phone when payer phone changes
+        document.getElementById('phoneNumber').addEventListener('input', function() {
+            const recipientField = document.getElementById('recipientPhone');
+            if (!recipientField.value) {
+                recipientField.value = this.value;
+            }
+        });
     </script>
 </body>
 </html>
