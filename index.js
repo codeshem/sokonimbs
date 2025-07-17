@@ -32,12 +32,14 @@ if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('your_supabase_url_here
     rpc: () => Promise.resolve({ data: null, error: null })
   };
 } else {
+  console.log('Supabase initialized successfully');
   global.supabase = createClient(supabaseUrl, supabaseKey);
 }
 
 
 // Initialize Lipia API
 const lipia = new LipiaAPI();
+console.log('Lipia API initialized. Demo mode:', lipia.demoMode ? 'ON' : 'OFF');
 
 // Serve the main HTML file
 app.get('/', (req, res) => {
