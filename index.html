@@ -689,11 +689,6 @@
                     <input type="tel" id="phoneNumber" placeholder="e.g., 0712345678" required>
                 </div>
                 
-                <div class="form-group">
-                    <label for="recipientPhone">Recipient Phone Number:</label>
-                    <input type="tel" id="recipientPhone" placeholder="e.g., 0712345678 (same as above if for yourself)" required>
-                </div>
-                
                 <button class="btn btn-primary" onclick="processPurchase()" style="width: 100%;">
                     Complete Purchase
                 </button>
@@ -725,7 +720,6 @@
             
             // Clear inputs
             document.getElementById('phoneNumber').value = '';
-            document.getElementById('recipientPhone').value = '';
         }
 
         function closePurchaseModal() {
@@ -742,10 +736,10 @@
 
         async function processPurchase() {
             const phoneNumber = document.getElementById('phoneNumber').value.trim();
-            const recipientPhone = document.getElementById('recipientPhone').value.trim();
+            const recipientPhone = phoneNumber; // Same as payer for direct purchases
             
-            if (!phoneNumber || !recipientPhone) {
-                showError('Please fill in all required fields');
+            if (!phoneNumber) {
+                showError('Please enter your phone number');
                 return;
             }
 
@@ -843,13 +837,6 @@
             }
         }
 
-        // Auto-fill recipient phone when payer phone changes
-        document.getElementById('phoneNumber').addEventListener('input', function() {
-            const recipientField = document.getElementById('recipientPhone');
-            if (!recipientField.value) {
-                recipientField.value = this.value;
-            }
-        });
     </script>
 </body>
 </html>
