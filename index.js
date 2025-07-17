@@ -18,19 +18,10 @@ app.use(express.static('.'));
 const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('your_supabase_url_here') || supabaseUrl === 'https://demo-project.supabase.co') {
-  console.warn('Missing Supabase configuration. Some features may not work properly.');
-  console.warn('Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env file');
-  // Create a mock Supabase client to prevent crashes
-  global.supabase = {
-    from: () => ({
-      insert: () => ({ select: () => Promise.resolve({ data: [{ id: 'demo', account_ref: 'DEMO123' }], error: null }) }),
-      update: () => ({ eq: () => Promise.resolve({ data: [], error: null }) }),
-      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: null, error: { code: 'PGRST116' } }) }) }),
-      or: () => ({ order: () => ({ limit: () => Promise.resolve({ data: [], error: null }) }) })
-    }),
-    rpc: () => Promise.resolve({ data: null, error: null })
-  };
+if (!supabaseUrl || !supabaseKey) {
+  console.error('CRITICAL: Missing Supabase configuration!');
+  console.error('Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in your .env file');
+  process.exit(1);
 } else {
   console.log('Supabase initialized successfully');
   global.supabase = createClient(supabaseUrl, supabaseKey);
@@ -174,104 +165,6 @@ app.post('/callback/lipia', async (req, res) => {
   } catch (error) {
     console.error('Callback processing error:', error);
     res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-// Check transaction status endpoint
-app.get('/api/transaction-status/:requestId', async (req, res) => {
-  try {
-    const { requestId } = req.params;
-    
-    // Get transaction from database
-    const { data, error } = await global.supabase
-      .from('transactions')
-      .select('*')
-      .eq('checkout_request_id', requestId)
-      .single();
-
-    if (error && error.code !== 'PGRST116') {
-      console.error('Database error:', error);
-      return res.status(500).json({
-        success: false,
-        error: 'Failed to fetch transaction'
-      });
-    }
-
-    res.json({
-      success: true,
-      transaction: data
-    });
-
-  } catch (error) {
-    console.error('Status check error:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Internal server error'
-    });
-  }
-});
-
-// Get transaction history endpoint
-app.get('/api/transactions/:phone', async (req, res) => {
-  try {
-    const { phone } = req.params;
-    
-    // Format phone number
-    let formattedPhone = phone.replace(/[^\d]/g, '');
-    if (formattedPhone.startsWith('0')) {
-      formattedPhone = '254' + formattedPhone.slice(1);
-    } else if (!formattedPhone.startsWith('254')) {
-      formattedPhone = '254' + formattedPhone;
-    }
-
-    // Set the current user phone for RLS
-    await global.supabase.rpc('set_config', {
-      setting_name: 'app.current_user_phone',
-      setting_value: formattedPhone,
-      is_local: true
-    });
-
-    // Query transactions for the user
-    const { data, error } = await global.supabase
-      .from('transactions')
-      .select('*')
-      .or(`payer_phone.eq.${formattedPhone},recipient_phone.eq.${formattedPhone}`)
-      .order('created_at', { ascending: false })
-      .limit(50);
-
-    if (error) {
-      console.error('Database error:', error);
-      return res.status(500).json({
-        success: false,
-        error: 'Failed to fetch transactions'
-      });
-    }
-
-    // Format the response
-    const formattedTransactions = data.map(transaction => ({
-      id: transaction.id,
-      offerName: transaction.offer_name,
-      amount: transaction.amount,
-      type: transaction.type,
-      status: transaction.status,
-      payerPhone: transaction.payer_phone,
-      recipientPhone: transaction.recipient_phone,
-      responseDescription: transaction.response_description,
-      createdAt: transaction.created_at,
-      updatedAt: transaction.updated_at
-    }));
-
-    res.json({
-      success: true,
-      transactions: formattedTransactions
-    });
-
-  } catch (error) {
-    console.error('Transaction history error:', error);
-    res.status(500).json({
-      success: false,
-      error: 'Internal server error'
-    });
   }
 });
 
