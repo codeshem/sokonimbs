@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bingwa - Mobile Services</title>
+    <title>Sokonimbs - Mobile Services</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,191 +14,450 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             min-height: 100vh;
-            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            33% { transform: translateX(-20px) translateY(-10px); }
+            66% { transform: translateX(20px) translateY(10px); }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 20px;
         }
 
+        /* Header with brand */
+        .brand-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-name {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            animation: brandGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes brandGlow {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.2); }
+        }
+
+        .brand-icon {
+            font-size: 2.5rem;
+            color: #ff6b6b;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 20px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: block;
+        }
+
+        /* Main header */
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             color: white;
         }
 
         .header h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-        }
-
-        .service-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .service-icon {
-            font-size: 2.5rem;
-            margin-right: 15px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #f0f8ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .service-title {
-            font-size: 1.8rem;
-            color: #333;
-            font-weight: 600;
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 400;
         }
 
+        /* Services grid with better organization */
+        .services-container {
+            display: grid;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .service-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--section-gradient);
+        }
+
+        .service-section.hot-offers {
+            --section-gradient: linear-gradient(90deg, #ff6b6b, #ff8e53);
+        }
+
+        .service-section.renewable-offers {
+            --section-gradient: linear-gradient(90deg, #4ecdc4, #44a08d);
+        }
+
+        .service-section.monthly-packages {
+            --section-gradient: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .service-section.minutes-offers {
+            --section-gradient: linear-gradient(90deg, #f093fb, #f5576c);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            background: var(--section-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .service-title {
+            font-size: 2.2rem;
+            color: #333;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .service-subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        /* Offers grid - more organized */
         .offers-grid {
             display: grid;
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
 
-        .offer-item {
-            background: #f8f9ff;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
+        .offer-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
 
-        .offer-item:hover {
-            background: #f0f2ff;
-            transform: translateX(5px);
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--section-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: var(--hover-color, #667eea);
+        }
+
+        .offer-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .hot-offers .offer-card {
+            --hover-color: #ff6b6b;
+        }
+
+        .renewable-offers .offer-card {
+            --hover-color: #4ecdc4;
+        }
+
+        .monthly-packages .offer-card {
+            --hover-color: #667eea;
+        }
+
+        .minutes-offers .offer-card {
+            --hover-color: #f093fb;
         }
 
         .offer-header {
             display: flex;
-            justify-content: between;
-            align-items: center;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 15px;
         }
 
         .offer-name {
-            font-weight: 600;
+            font-weight: 700;
             color: #333;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            line-height: 1.3;
+            flex: 1;
         }
 
         .offer-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--section-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
+            margin-left: 15px;
         }
 
         .offer-details {
             color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .offer-validity {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .offer-description {
+            font-style: italic;
+            color: #777;
         }
 
         .offer-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--section-gradient);
             color: white;
             flex: 1;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
         .btn-secondary {
-            background: #f8f9ff;
-            color: #667eea;
-            border: 2px solid #667eea;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+            border: 2px solid var(--hover-color, #667eea);
             flex: 1;
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: #667eea;
+            background: var(--hover-color, #667eea);
             color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Transaction History - Enhanced */
+        .transaction-history {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px;
+            margin-top: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+        }
+
+        .transaction-history::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            border-radius: 25px 25px 0 0;
+        }
+
+        .transaction-history h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
         }
 
         .phone-input-container {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .phone-input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 15px 20px;
             border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
         }
 
         .phone-input:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
         }
 
+        .transaction-item {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .transaction-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Modal enhancements */
         .modal {
             display: none;
             position: fixed;
@@ -206,92 +466,110 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
-            background-color: white;
+            background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
             margin: 5% auto;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 40px;
+            border-radius: 25px;
             width: 90%;
             max-width: 500px;
             position: relative;
-            animation: modalSlideIn 0.3s ease;
+            animation: modalSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         @keyframes modalSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(-100px) scale(0.8);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
 
         .close {
             position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 28px;
+            right: 25px;
+            top: 25px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
             color: #aaa;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .close:hover {
             color: #333;
+            background: rgba(255, 255, 255, 0.8);
+            transform: rotate(90deg);
         }
 
         .modal h2 {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #333;
             text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
             color: #333;
+            font-size: 1.1rem;
         }
 
-        .form-group input, .form-group select {
+        .form-group input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 15px 20px;
             border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus {
             outline: none;
             border-color: #667eea;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
         }
 
+        /* Loading and messages */
         .loading {
             display: none;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
         }
 
         .spinner {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #667eea;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
+            margin: 0 auto 20px;
         }
 
         @keyframes spin {
@@ -300,104 +578,73 @@
         }
 
         .success-message, .error-message {
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
             display: none;
+            font-weight: 500;
         }
 
         .success-message {
-            background-color: #d4edda;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
             color: #155724;
             border: 1px solid #c3e6cb;
         }
 
         .error-message {
-            background-color: #f8d7da;
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
 
-        .transaction-history {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .transaction-history h2 {
-            color: #333;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .transaction-item {
-            background: #f8f9ff;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #667eea;
-        }
-
-        .transaction-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .transaction-name {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .transaction-amount {
-            font-weight: 700;
-            color: #667eea;
-        }
-
-        .transaction-details {
-            color: #666;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-
+        /* Status badges */
         .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .status-success {
-            background-color: #d4edda;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
             color: #155724;
         }
 
         .status-pending {
-            background-color: #fff3cd;
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
             color: #856404;
         }
 
         .status-failed {
-            background-color: #f8d7da;
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
             color: #721c24;
         }
 
+        /* Responsive design */
         @media (max-width: 768px) {
-            .header h1 {
+            .brand-header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .brand-name {
                 font-size: 2rem;
             }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
             
-            .services-grid {
+            .offers-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
             
-            .service-card {
-                padding: 20px;
+            .service-section {
+                padding: 25px;
             }
             
             .offer-actions {
@@ -406,109 +653,219 @@
             
             .modal-content {
                 margin: 10% auto;
-                padding: 20px;
+                padding: 30px;
             }
+
+            .header-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        /* Floating elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
     </style>
 </head>
 <body>
+    <!-- Floating background elements -->
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+    </div>
+
     <div class="container">
-        <div class="header">
-            <h1>🎯 Bingwa</h1>
-            <p>Your trusted mobile services provider</p>
+        <!-- Brand Header -->
+        <div class="brand-header">
+            <div class="brand-logo">
+                <i class="fas fa-mobile-alt brand-icon"></i>
+                <span class="brand-name">Sokonimbs</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span>Service</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">99.9%</span>
+                    <span>Uptime</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50K+</span>
+                    <span>Users</span>
+                </div>
+            </div>
         </div>
 
-        <div class="services-grid">
+        <!-- Main Header -->
+        <div class="header">
+            <h1>🎯 Bingwa Mobile Services</h1>
+            <p>Your trusted partner for all mobile services and bundles</p>
+        </div>
+
+        <!-- Services Container -->
+        <div class="services-container">
             <!-- Hot Offers -->
-            <div class="service-card">
+            <div class="service-section hot-offers">
                 <div class="service-header">
                     <i class="fas fa-fire service-icon"></i>
-                    <h2 class="service-title">🔥 Hot Offers</h2>
+                    <div>
+                        <h2 class="service-title">🔥 Hot Offers</h2>
+                        <p class="service-subtitle">Limited time deals with amazing value</p>
+                    </div>
                 </div>
                 <div class="offers-grid">
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">1.25GB Till Midnight</span>
                             <span class="offer-price">KSh 55</span>
                         </div>
-                        <div class="offer-details">Valid until midnight • Perfect for evening browsing</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid until midnight</span>
+                            <span class="offer-description">Perfect for evening browsing</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '1.25GB Till Midnight', 55)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">1.2GB Monthly</span>
                             <span class="offer-price">KSh 250</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Long-term data bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Long-term data bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '1.2GB Monthly', 250)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">350MB Weekly</span>
                             <span class="offer-price">KSh 49</span>
                         </div>
-                        <div class="offer-details">Valid for 7 days • Weekly data bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 7 days</span>
+                            <span class="offer-description">Weekly data bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '350MB Weekly', 49)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">1GB Hourly</span>
                             <span class="offer-price">KSh 19</span>
                         </div>
-                        <div class="offer-details">Valid for 1 hour • Quick data boost</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 1 hour</span>
+                            <span class="offer-description">Quick data boost</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '1GB Hourly', 19)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">250MB Daily</span>
                             <span class="offer-price">KSh 20</span>
                         </div>
-                        <div class="offer-details">Valid for 24 hours • Daily data bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 24 hours</span>
+                            <span class="offer-description">Daily data bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '250MB Daily', 20)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">1GB Daily Premium</span>
                             <span class="offer-price">KSh 99</span>
                         </div>
-                        <div class="offer-details">Valid for 24 hours • Premium daily bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 24 hours</span>
+                            <span class="offer-description">Premium daily bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '1GB Daily Premium', 99)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">2.5GB Weekly</span>
                             <span class="offer-price">KSh 300</span>
                         </div>
-                        <div class="offer-details">Valid for 7 days • Weekly power bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 7 days</span>
+                            <span class="offer-description">Weekly power bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '2.5GB Weekly', 300)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">6GB Weekly</span>
                             <span class="offer-price">KSh 700</span>
                         </div>
-                        <div class="offer-details">Valid for 7 days • Ultimate weekly bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 7 days</span>
+                            <span class="offer-description">Ultimate weekly bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('data', '6GB Weekly', 700)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
@@ -518,40 +875,52 @@
             </div>
 
             <!-- Renewable Offers -->
-            <div class="service-card">
+            <div class="service-section renewable-offers">
                 <div class="service-header">
                     <i class="fas fa-sync-alt service-icon"></i>
-                    <h2 class="service-title">🔄 Renewable Offers</h2>
+                    <div>
+                        <h2 class="service-title">🔄 Renewable Offers</h2>
+                        <p class="service-subtitle">Auto-renewing bundles for continuous service</p>
+                    </div>
                 </div>
                 <div class="offers-grid">
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">2GB Daily Renewable Save 20%</span>
                             <span class="offer-price">KSh 110</span>
                         </div>
-                        <div class="offer-details">Valid for 24 hours • Auto-renews daily with savings</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 24 hours</span>
+                            <span class="offer-description">Auto-renews daily with savings</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('renewable', '2GB Daily Renewable Save 20%', 110)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">1GB Hourly Renewable</span>
                             <span class="offer-price">KSh 23</span>
                         </div>
-                        <div class="offer-details">Valid for 1 hour • Auto-renews hourly</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 1 hour</span>
+                            <span class="offer-description">Auto-renews hourly</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('renewable', '1GB Hourly Renewable', 23)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">1.5GB 3-Hour Renewable</span>
                             <span class="offer-price">KSh 52</span>
                         </div>
-                        <div class="offer-details">Valid for 3 hours • Auto-renews every 3 hours</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 3 hours</span>
+                            <span class="offer-description">Auto-renews every 3 hours</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('renewable', '1.5GB 3-Hour Renewable', 52)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
@@ -561,73 +930,94 @@
             </div>
 
             <!-- Monthly Packages -->
-            <div class="service-card">
+            <div class="service-section monthly-packages">
                 <div class="service-header">
                     <i class="fas fa-calendar-alt service-icon"></i>
-                    <h2 class="service-title">📅 Monthly Packages</h2>
+                    <div>
+                        <h2 class="service-title">📅 Monthly Packages</h2>
+                        <p class="service-subtitle">Long-term bundles for consistent usage</p>
+                    </div>
                 </div>
                 <div class="offers-grid">
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">1.2GB Monthly</span>
                             <span class="offer-price">KSh 250</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Monthly data package</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Monthly data package</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('monthly', '1.2GB Monthly', 250)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">300 Minutes Monthly</span>
                             <span class="offer-price">KSh 500</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Monthly calling bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Monthly calling bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '300 Minutes Monthly', 500)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">800 Minutes Monthly</span>
                             <span class="offer-price">KSh 1001</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Premium calling bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Premium calling bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '800 Minutes Monthly', 1001)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">8GB + 400 Minutes Combo</span>
                             <span class="offer-price">KSh 999</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Ultimate monthly combo</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Ultimate monthly combo</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('monthly', '8GB + 400 Minutes Combo', 999)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">2.5GB Monthly</span>
                             <span class="offer-price">KSh 500</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Monthly data bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Monthly data bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('monthly', '2.5GB Monthly', 500)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">10GB Monthly</span>
                             <span class="offer-price">KSh 1000</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Large monthly data bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Large monthly data bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('monthly', '10GB Monthly', 1000)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
@@ -637,62 +1027,80 @@
             </div>
 
             <!-- Minutes Offers -->
-            <div class="service-card">
+            <div class="service-section minutes-offers">
                 <div class="service-header">
                     <i class="fas fa-phone service-icon"></i>
-                    <h2 class="service-title">📞 Minutes Offers</h2>
+                    <div>
+                        <h2 class="service-title">📞 Minutes Offers</h2>
+                        <p class="service-subtitle">Voice calling bundles for all your communication needs</p>
+                    </div>
                 </div>
                 <div class="offers-grid">
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">45 Minutes</span>
                             <span class="offer-price">KSh 22</span>
                         </div>
-                        <div class="offer-details">Valid for 3 hours • Quick calling bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 3 hours</span>
+                            <span class="offer-description">Quick calling bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '45 Minutes', 22)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">50 Minutes Till Midnight</span>
                             <span class="offer-price">KSh 51</span>
                         </div>
-                        <div class="offer-details">Valid till midnight • Evening calling bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid till midnight</span>
+                            <span class="offer-description">Evening calling bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '50 Minutes Till Midnight', 51)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">200 Minutes Weekly</span>
                             <span class="offer-price">KSh 250</span>
                         </div>
-                        <div class="offer-details">Valid for 7 days • Weekly calling bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 7 days</span>
+                            <span class="offer-description">Weekly calling bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '200 Minutes Weekly', 250)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">300 Minutes Monthly</span>
                             <span class="offer-price">KSh 500</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Monthly calling bundle</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Monthly calling bundle</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '300 Minutes Monthly', 500)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
                         </div>
                     </div>
-                    <div class="offer-item">
+                    <div class="offer-card">
                         <div class="offer-header">
                             <span class="offer-name">800 Minutes Monthly</span>
                             <span class="offer-price">KSh 1001</span>
                         </div>
-                        <div class="offer-details">Valid for 30 days • Premium monthly calling</div>
+                        <div class="offer-details">
+                            <span class="offer-validity">Valid for 30 days</span>
+                            <span class="offer-description">Premium monthly calling</span>
+                        </div>
                         <div class="offer-actions">
                             <button class="btn btn-primary" onclick="openPurchaseModal('minutes', '800 Minutes Monthly', 1001)">Buy Now</button>
                             <a href="https://bingwahybrid.com/be3a7ea16f" class="btn btn-secondary" target="_blank">Buy for Another</a>
@@ -700,8 +1108,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
 
         <!-- Transaction History -->
@@ -709,7 +1115,7 @@
             <h2>📊 Transaction History</h2>
             <div class="phone-input-container">
                 <input type="tel" id="historyPhone" class="phone-input" placeholder="Enter phone number to view history (e.g., 0712345678)">
-                <button class="btn btn-primary" onclick="loadTransactionHistory()" style="margin-top: 10px; width: 100%;">Load History</button>
+                <button class="btn btn-primary" onclick="loadTransactionHistory()" style="margin-top: 15px; width: 100%; background: linear-gradient(135deg, #667eea, #764ba2);">Load History</button>
             </div>
             <div id="transactionsList"></div>
         </div>
@@ -727,7 +1133,7 @@
                     <input type="tel" id="phoneNumber" placeholder="e.g., 0712345678" required>
                 </div>
                 
-                <button class="btn btn-primary" onclick="processPurchase()" style="width: 100%;">
+                <button class="btn btn-primary" onclick="processPurchase()" style="width: 100%; background: linear-gradient(135deg, #667eea, #764ba2);">
                     Complete Purchase
                 </button>
             </div>
@@ -874,7 +1280,6 @@
                 document.getElementById('transactionsList').innerHTML = '<p style="text-align: center; color: #721c24; padding: 20px;">Error loading transaction history. Please try again.</p>';
             }
         }
-
     </script>
 </body>
 </html>
